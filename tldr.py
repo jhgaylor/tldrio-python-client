@@ -3,6 +3,9 @@ import json
 
 
 class TLDRClient(object):
+    """
+    An api wrapper for http://tldr.io/ 
+    """
     api_url = "https://api.tldr.io/"
     
     def __init__(self, name, key):
@@ -10,6 +13,9 @@ class TLDRClient(object):
         self.key = key
 
     def headers(self):
+        """
+        Helper to return request headers
+        """
         return {
             'name': self.name,
             'key': self.key,
@@ -17,7 +23,9 @@ class TLDRClient(object):
         }
 
     def _check(self, response):
-        #this could get more sophisticated.  copy from the js library
+        """
+        Returns the state of the response.  Data on success, error on failure
+        """
         if response.status_code >= 200:
             #success codes should be handled here
             if response.status_code == 200:
@@ -35,21 +43,34 @@ class TLDRClient(object):
             
 
     def getLatestTldrs(self, number):
+        """
+        Retrieve the latest tldrs :: GET /tldrs/latest/:number
+        """
         url = self.api_url + "tldrs/latest/" + str(number)
         response = requests.get(url, headers=self.headers())
         return self._check(response)
 
+    #I'd almost like to call this getUrlOr404
     def searchByUrl(self, target_url):
+        """
+        Retrieve tldr for url or 404 :: GET /tldrs/search/?url=:url
+        """
         url = self.api_url + "tldrs/search"
         response = requests.get(url, params={"url": target_url}, headers=self.headers())
         return self._check(response)
 
     def searchBatch(self, target_urls):
+        """
+        Retrieve the tldrs for a set of urls :: POST /tldrs/searchBatch
+        """
         url = self.api_url + "tldrs/searchBatch"
         response = requests.post(url, data=json.dumps({'batch': target_urls}), headers=self.headers())
         return self._check(response)
 
-    def getUser(self, username, tldrs=False):
+    def getUser(self, username):
+        """
+        Retrieve user data :: GET /users/:username
+        """
         url = self.api_url + "users/"+username+"/"
         if tldrs:
             url += "tldrsCreated"
@@ -57,7 +78,12 @@ class TLDRClient(object):
         return self._check(response)
 
     def getUserData(self, username):
-        return self.getUser(username, True)
+        """
+        Retrieve tldrs by user :: GET /users/:username/tldrsCreated/
+        """
+        url = self.api_url + "users/"+username+"/tldrsCreated"
+        response = requests.get(url, headers=self.headers())
+        return self._check(response)
 
 if __name__ == '__main__':
     print "Why are you running this????"
