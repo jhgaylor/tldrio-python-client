@@ -1,3 +1,9 @@
+## To install w/ pip
+
+    pip install git+https://github.com/jhgaylor/tldrio-python-client.git
+
+## How to use
+
     from tldr import TLDRClient
 
     t = TLDRClient("name", "key")
