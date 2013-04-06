@@ -1,4 +1,4 @@
-from api import TLDRClient
+from tldr import TLDRClient
 
 t = TLDRClient("name", "key")
 latest = t.getLatestTldrs(3)
