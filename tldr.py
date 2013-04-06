@@ -45,8 +45,6 @@ class TLDRClient(object):
         return self._check(response)
 
     def searchBatch(self, target_urls):
-        #getting odd output via python, but the endpoint seems to be working fine from fetcher
-        #{"tldrs": [], "urls": {"o": "other://o", "d": "other://d", "i": "other://i", "h": "other://h", "l": "other://l", "/": "other:///", ".": "other://.", "p": "other://p", "r": "other://r", "t": "other://t", ":": "other://:"}}
         url = self.api_url + "tldrs/searchBatch"
         response = requests.post(url, data=json.dumps({'batch': target_urls}), headers=self.headers())
         return self._check(response)
