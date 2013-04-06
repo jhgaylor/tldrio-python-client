@@ -7,7 +7,7 @@ setup(
     author = "Jake Gaylor",
     author_email = "jake@codegur.us",
     description = "An api wrapper for http://tldr.io/",
-    url = "https://github.com/jhgaylor/tldr-python-client/",
+    url = "https://github.com/jhgaylor/tldrio-python-client",
     install_requires = [ln for ln in open('requirements.txt')],
     packages = find_packages(), 
     include_package_data = True,
