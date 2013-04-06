@@ -1,4 +1,6 @@
 import requests
+import json
+
 
 class TLDRClient(object):
     api_url = "https://api.tldr.io/"
@@ -10,48 +12,55 @@ class TLDRClient(object):
     def headers(self):
         return {
             'name': self.name,
-            'key': self.key
+            'key': self.key,
+            'content-type': 'application/json'
         }
 
-    def check(self, response):
+    def _check(self, response):
         #this could get more sophisticated.  copy from the js library
-        if response.status_code == 200:
-            return response.json()
-        else:
-            return {
-                'code':response.status_code,
+        if response.status_code >= 200:
+            #success codes should be handled here
+            if response.status_code == 200:
+                return response.json()
+        if response.status_code >= 400:
+            #default error. assumes the api returns error text as the body
+            error = {
+                'code': response.status_code,
                 'error': response.text
             }
+            if response.status_code == 404:
+                error['error'] = "URL not found."
+
+            return error
+            
 
     def getLatestTldrs(self, number):
         url = self.api_url + "tldrs/latest/" + str(number)
         response = requests.get(url, headers=self.headers())
-        return self.check(response)
+        return self._check(response)
 
     def searchByUrl(self, target_url):
-        #check the requests docs
         url = self.api_url + "tldrs/search"
-        response = requests.get(url, data={"url": target_url}, headers=self.headers())
-        return self.check(response)
+        response = requests.get(url, params={"url": target_url}, headers=self.headers())
+        return self._check(response)
 
     def searchBatch(self, target_urls):
         #getting odd output via python, but the endpoint seems to be working fine from fetcher
         #{"tldrs": [], "urls": {"o": "other://o", "d": "other://d", "i": "other://i", "h": "other://h", "l": "other://l", "/": "other:///", ".": "other://.", "p": "other://p", "r": "other://r", "t": "other://t", ":": "other://:"}}
         url = self.api_url + "tldrs/searchBatch"
-        response = requests.post(url, data={"batch": target_urls}, headers=self.headers())
-        return self.check(response)
+        response = requests.post(url, data=json.dumps({'batch': target_urls}), headers=self.headers())
+        return self._check(response)
 
     def getUser(self, username, tldrs=False):
-        url = self.api_url + "tldrs/latest/" + str(number)
+        url = self.api_url + "users/"+username+"/"
+        if tldrs:
+            url += "tldrsCreated"
         response = requests.get(url, headers=self.headers())
-        return self.check(response)
+        return self._check(response)
 
-#GET /users/:username/tldrsCreated
-import json
-t = TLDRClient("jakegaylor", "8P5mD26fGye43y66K5p5")
-print t.api_url
-#t.getLatestTldrs(3)
-print json.dumps(t.searchBatch(["http://tldr.io/"]))
+    def getUserData(self, username):
+        return self.getUser(username, True)
 
-# r = requests.get("http://codegur.us")
-# print r.text
+if __name__ == '__main__':
+    print "Why are you running this????"
+
