@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = "tldr-python-client",
-    version = "0.0.0.1",
+    version = "0.1",
     author = "Jake Gaylor",
     author_email = "jake@codegur.us",
     description = "An api wrapper for http://tldr.io/",

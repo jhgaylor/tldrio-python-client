@@ -86,5 +86,5 @@ class TLDRClient(object):
         return self._check(response)
 
 if __name__ == '__main__':
-    print "Why are you running this????"
+    print "Why are you running this? import it!"
 
