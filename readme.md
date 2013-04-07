@@ -1,3 +1,7 @@
+## API Docs @ tldr.io
+
+http://tldr.io/api-documentation
+
 ## To install w/ pip
 
     pip install git+https://github.com/jhgaylor/tldrio-python-client.git
