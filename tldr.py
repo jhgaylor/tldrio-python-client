@@ -4,7 +4,7 @@ import json
 
 class TLDRClient(object):
     """
-    An api wrapper for http://tldr.io/ 
+    An api wrapper for http://tldr.io/
     """
     api_url = "https://api.tldr.io/"
     
