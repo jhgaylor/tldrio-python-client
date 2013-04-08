@@ -19,7 +19,7 @@ class TLDRClient(object):
         return {
             'name': self.name,
             'key': self.key,
-            #'content-type': 'application/json'
+            'content-type': 'application/json'
         }
 
     def _check(self, response):
@@ -72,8 +72,6 @@ class TLDRClient(object):
         Retrieve user data :: GET /users/:username
         """
         url = self.api_url + "users/"+username+"/"
-        if tldrs:
-            url += "tldrsCreated"
         response = requests.get(url, headers=self.headers())
         return self._check(response)
 
@@ -86,7 +84,13 @@ class TLDRClient(object):
         return self._check(response)
 
 if __name__ == '__main__':
-    #c = TLDRClient("name", "key")
-    #print c.searchByUrl("http://codegur.us/")
-    print "Why are you running this? import it!"
+    c = TLDRClient("name", "key")
+    # These don't work if content-type: application/json is set
+    # print c.getLatestTldrs(5)
+    # print c.searchByUrl("http://codegur.us/"])
+    # print c.getUser("jhgaylor")
+    # print c.getUserData("jhgaylor")
+    # And this one does
+    # print c.searchBatch(["http://codegur.us/"])
+    # print "Why are you running this? import it!"
 
