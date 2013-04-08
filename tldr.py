@@ -19,7 +19,7 @@ class TLDRClient(object):
         return {
             'name': self.name,
             'key': self.key,
-            'content-type': 'application/json'
+            #'content-type': 'application/json'
         }
 
     def _check(self, response):
@@ -37,8 +37,8 @@ class TLDRClient(object):
                 'error': response.text
             }
             if response.status_code == 404:
+                #print response.text #uncomment this to see the body of the response
                 error['error'] = "URL not found."
-
             return error
             
 
@@ -50,13 +50,13 @@ class TLDRClient(object):
         response = requests.get(url, headers=self.headers())
         return self._check(response)
 
-    #I'd almost like to call this getUrlOr404
     def searchByUrl(self, target_url):
         """
         Retrieve tldr for url or 404 :: GET /tldrs/search/?url=:url
         """
         url = self.api_url + "tldrs/search"
         response = requests.get(url, params={"url": target_url}, headers=self.headers())
+        print response.url
         return self._check(response)
 
     def searchBatch(self, target_urls):
@@ -86,5 +86,7 @@ class TLDRClient(object):
         return self._check(response)
 
 if __name__ == '__main__':
+    #c = TLDRClient("name", "key")
+    #print c.searchByUrl("http://codegur.us/")
     print "Why are you running this? import it!"
 
