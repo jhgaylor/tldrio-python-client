@@ -10,6 +10,8 @@ Via pip
 
     pip install git+https://github.com/jhgaylor/tldrio-python-client.git
 
+### OR
+
 Clone the repo
 
     git clone https://github.com/jhgaylor/tldrio-python-client.git
