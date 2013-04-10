@@ -10,7 +10,11 @@ http://tldr.io/api-documentation
 
     from tldr import TLDRClient
 
+    # Instantiate a client
     t = TLDRClient("name", "key")
+
+    # Sample endpoint calls
+    # All return values are inflated json
     latest = t.getLatestTldrs(3)
     tldr_mainpage = t.searchByUrl("http://tldr.io")
     batch = t.searchBatch(["http://tldr.io","http://jakelevine.me/blog/2013/04/nobody-knows-that-i-use-these-apps/"])
