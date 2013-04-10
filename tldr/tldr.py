@@ -103,6 +103,4 @@ class TLDRClient(object):
         return self._check(response)
 
 if __name__ == '__main__':
-    c = TLDRClient("jakegaylor", "8P5mD26fGye43y66K5p5")
-    print c.getUserData("jhgaylor")
     print "Why are you running this? import it!"
