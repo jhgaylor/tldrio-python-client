@@ -66,5 +66,5 @@ The syntax is `client.getUserTldrs(username)` where `username` is the username o
 Returns a list of tldrs or error object
 
 ```python
-tldrs = client.getUserData('jhgaylor')
+tldrs = client.getUserTldrs('jhgaylor')
 ```
