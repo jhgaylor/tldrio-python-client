@@ -90,11 +90,11 @@ class ApiTest(unittest.TestCase):
         self.assertTrue(resp)
         self.assertTrue(json.dumps(resp))
 
-    def test_getUserData(self):
+    def test_getUserTldrs(self):
         """
         Test that a json response is returned
         """
-        resp = self.client.getUserData("jhgaylor")
+        resp = self.client.getUserTldrs("jhgaylor")
         self.assertTrue(resp)
         self.assertTrue(json.dumps(resp))
 

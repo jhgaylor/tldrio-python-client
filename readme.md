@@ -1,24 +1,70 @@
-## API Docs @ tldr.io
+# Python client for tldr.io's public API
 
-http://tldr.io/api-documentation
+Python client for <a href="http://tldr.io">tldr.io</a>'s
+public API (whose doc you can find <a href="http://tldr.io/api-documentation">here</a>).
 
-## To install w/ pip
+
+## Installation
+
+Via pip
 
     pip install git+https://github.com/jhgaylor/tldrio-python-client.git
 
-## How to use
+Clone the repo
 
-    from tldr import TLDRClient
+    git clone https://github.com/jhgaylor/tldrio-python-client.git
 
-    # Instantiate a client
-    t = TLDRClient("name", "key")
 
-    # Sample endpoint calls
-    # All return values are inflated json
-    latest = t.getLatestTldrs(3)
-    tldr_mainpage = t.searchByUrl("http://tldr.io")
-    batch = t.searchBatch(["http://tldr.io","http://jakelevine.me/blog/2013/04/nobody-knows-that-i-use-these-apps/"])
-    user = t.getUser("jhgaylor")
-    user_tldrs = t.getUserData("jhgaylor")
+## Creating a client
+```python
+from tldr import TLDRClient
 
-    print latest, tldr_mainpage, batch, user, user_tldrs
+client = TLDRClient("name", "key")
+```
+
+## Getting the latest tldrs
+The syntax is `client.getLatestTldrs(number)`, where `number` is the number of tldrs you want to get (maximum 50) For example:
+
+Returns a list of tldrs or error object
+
+```python
+tldrs = client.getLatestTldrs(5)
+```
+
+## Searching tldrs by url
+The syntax is `client.searchByUrl(url)` where `url` is the url (figures ...) For example:
+
+Returns a tldr or error object
+
+```python
+tldr = client.searchByUrl('http://tldr.io')
+```
+
+## Searching the tldrs for a batch of urls
+The syntax is `client.searchBatch(urls)` where `urls` is an array of urls.  You can't search for more than 50 tldrs at once. For example:
+
+Returns a list of tldrs or error object
+
+```python
+response = client.searchBatch(['http://tldr.io', 'http://news.ycombinator.com/'])
+```
+
+## Getting user data
+The syntax is `client.getUser(username)` where `username` is the username of the target user.  For example:
+
+Returns a user or error object
+
+```python
+user_data = client.getUser('jhgaylor')
+```
+
+
+
+## Searching tldrs by user
+The syntax is `client.getUserTldrs(username)` where `username` is the username of the author of the tldrs For example:
+
+Returns a list of tldrs or error object
+
+```python
+tldrs = client.getUserData('jhgaylor')
+```

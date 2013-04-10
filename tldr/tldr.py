@@ -90,7 +90,7 @@ class TLDRClient(object):
         response = requests.get(url, headers=headers)
         return self._check(response)
 
-    def getUserData(self, username):
+    def getUserTldrs(self, username):
         """
         Retrieve tldrs by user :: GET /users/:username/tldrsCreated/
         Returns inflated JSON
@@ -103,4 +103,6 @@ class TLDRClient(object):
         return self._check(response)
 
 if __name__ == '__main__':
+    c = TLDRClient("jakegaylor", "8P5mD26fGye43y66K5p5")
+    print c.getUserData("jhgaylor")
     print "Why are you running this? import it!"
