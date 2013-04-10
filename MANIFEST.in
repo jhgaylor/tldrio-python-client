@@ -1,1 +1,1 @@
-include AUTHORS README.md LICENSE requirements.txt
+include AUTHORS README.md LICENSE requirements.txt *.py
