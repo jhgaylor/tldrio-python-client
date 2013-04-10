@@ -46,7 +46,7 @@ The syntax is `client.searchBatch(urls)` where `urls` is an array of urls.  You 
 Returns a list of tldrs or error object
 
 ```python
-response = client.searchBatch(['http://tldr.io', 'http://news.ycombinator.com/'])
+tldrs = client.searchBatch(['http://tldr.io', 'http://news.ycombinator.com/'])
 ```
 
 ## Getting user data
