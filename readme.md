@@ -108,5 +108,6 @@ The syntax is `client.getLatestTldrsByCategory(number, category_slug)`  where `n
 Returns a list of tldrs or error object
 
 ```python
+#alias for client.getLatestTldrs(5, params={'category':"tech-news"})
 tldrs = client.getLatestTldrsByCategory(5, "tech-news")
 ```
