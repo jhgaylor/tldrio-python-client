@@ -106,6 +106,13 @@ class ApiTest(unittest.TestCase):
         self.assertTrue(resp)
         self.assertTrue(json.dumps(resp))
 
+    def test_getLatestTldrsByCategory(self):
+        """
+        Test that a json response is returned
+        """
+        resp = self.client.getLatestTldrsByCategory(5, "tech-news")
+        self.assertTrue(resp)
+        self.assertTrue(json.dumps(resp))
 
 if __name__ == '__main__':
     unittest.main()

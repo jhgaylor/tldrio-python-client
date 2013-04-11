@@ -25,12 +25,18 @@ client = TLDRClient("name", "key")
 ```
 
 ## Getting the latest tldrs
-The syntax is `client.getLatestTldrs(number)`, where `number` is the number of tldrs you want to get (maximum 50) For example:
+The syntax is `client.getLatestTldrs(number, params)`, where `number` is the number of tldrs you want to get (maximum 50) and params (optional) is a dictionary representing a query string. For example:
 
 Returns a list of tldrs or error object
 
 ```python
+#latest 5 tldrs
 tldrs = client.getLatestTldrs(5)
+```
+
+```python
+#latest 5 tldrs for category "tech-news"
+tldrs = client.getLatestTldrs(5, parms={'category':"tech-news"})
 ```
 
 ## Searching tldrs by url
@@ -86,12 +92,21 @@ The data format is:
 ```javascript
 [
     {
-        "_id": "5150639a43aac5ab0b000001", 
-        "type": "category", 
+        "_id": "5150639a43aac5ab0b000001",
+        "type": "category",
         "name": "Tech News",
-         "slug": "tech-news"
+        "slug": "tech-news"
     },
     ...
 ]
 ```
 
+## Getting tldr categories
+
+The syntax is `client.getLatestTldrsByCategory(number, category_slug)`  where `number` is the number of tldrs you want to get (maximum 50) and category_slug is the slug returned from /categories/ For example:
+
+Returns a list of tldrs or error object
+
+```python
+tldrs = client.getLatestTldrsByCategory(5, "tech-news")
+```

@@ -41,7 +41,7 @@ class TLDRClient(object):
                 error['error'] = "URL not found."
             return error
 
-    def getLatestTldrs(self, number):
+    def getLatestTldrs(self, number, params={}):
         """
         Retrieve the latest tldrs :: GET /tldrs/latest/:number
         Returns inflated JSON
@@ -49,6 +49,7 @@ class TLDRClient(object):
         url = self.api_url + "tldrs/latest/" + str(number)
         headers = self.auth_headers()
         response = requests.get(url,
+                                params=params,
                                 headers=headers
                                 )
         return self._check(response)
@@ -104,14 +105,23 @@ class TLDRClient(object):
 
     def getCategories(self):
         """
-
+        Retrieve all categories for tldrs :: GET /categories
+        Returns inflated JSON
         """
         url = self.api_url + "categories/"
         headers = self.auth_headers()
         response = requests.get(url,
-                               headers=headers
-                               )
+                                headers=headers
+                                )
         return self._check(response)
+
+    def getLatestTldrsByCategory(self, number, category):
+        """
+        Alias for getLatestTldrs(self, number, params={'category':category})
+        Category should be the tldr slug for the category
+        """
+        return self.getLatestTldrs(number, params={'category': category})
+
 
 if __name__ == '__main__':
     print "Why are you running this? import it!"
