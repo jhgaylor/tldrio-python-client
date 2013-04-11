@@ -19,7 +19,7 @@ Clone the repo
 
 ## Creating a client
 ```python
-from tldr import TLDRClient
+from tldr.tldr import TLDRClient
 
 client = TLDRClient("name", "key")
 ```
