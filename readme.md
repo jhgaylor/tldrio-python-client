@@ -70,3 +70,28 @@ Returns a list of tldrs or error object
 ```python
 tldrs = client.getUserTldrs('jhgaylor')
 ```
+
+## Getting tldr categories
+
+The syntax is `client.getCategories()`  For example:
+
+Returns a list of tldrs or error object
+
+```python
+categories = client.getCategories()
+```
+
+The data format is:
+
+```javascript
+[
+    {
+        "_id": "5150639a43aac5ab0b000001", 
+        "type": "category", 
+        "name": "Tech News",
+         "slug": "tech-news"
+    },
+    ...
+]
+```
+

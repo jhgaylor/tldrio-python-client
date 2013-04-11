@@ -98,6 +98,14 @@ class ApiTest(unittest.TestCase):
         self.assertTrue(resp)
         self.assertTrue(json.dumps(resp))
 
+    def test_getCategories(self):
+        """
+        Test that a json response is returned
+        """
+        resp = self.client.getCategories()
+        self.assertTrue(resp)
+        self.assertTrue(json.dumps(resp))
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -102,5 +102,16 @@ class TLDRClient(object):
                                 )
         return self._check(response)
 
+    def getCategories(self):
+        """
+
+        """
+        url = self.api_url + "categories/"
+        headers = self.auth_headers()
+        response = requests.get(url,
+                               headers=headers
+                               )
+        return self._check(response)
+
 if __name__ == '__main__':
     print "Why are you running this? import it!"
